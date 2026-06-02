@@ -1,6 +1,5 @@
 ---
 
-```markdown
 # Fluent Python Ch.6 — Object References, Mutability, and Recycling
 # Key notes for C++ → Python transition
 
