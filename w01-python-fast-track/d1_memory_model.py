@@ -1,5 +1,5 @@
 # week1 - chapter 6 
-# python's reference model vs C++ value semantics
+# python's reference model
 
 # ============================================================
 # 1. VARIABLES ARE NOT BOXES — they are labels/references
