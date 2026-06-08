@@ -394,7 +394,74 @@ all_tools = agent1_tools | agent2_tools   # full capability union
 ```
 
 
----
+## 12. Counter
+# Counter is a class from the built-in module collections used to count how many times each element appears in a collection (like a list, string, or tuple)
+
+```python
+# create a Counter
+from collections import Counter
+
+# 1. From an iterable — counts occurrences automatically
+ct = Counter('abracadabra')
+print(ct)   # Counter({'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1})
+
+# 2. From a sequence of words
+word_count = Counter(['spam', 'eggs', 'spam', 'bacon', 'spam'])
+print(word_count)   # Counter({'spam': 3, 'eggs': 1, 'bacon': 1})
+
+# 3. From keyword args
+ct = Counter(a=3, b=2, c=1)
+
+
+# important methods
+ct = Counter('abracadabra')
+
+# most_common(n) — returns top n (key, count) pairs, sorted by count
+ct.most_common(3)   # [('a', 5), ('b', 2), ('r', 2)]
+ct.most_common(1)   # [('a', 5)]
+
+# Missing keys return 0 — no KeyError (unlike plain dict)
+ct['z']   # 0
+
+# update() — ADDS counts, does not replace
+ct.update('aaa')
+ct['a']   # 8  (was 5, added 3)
+
+# subtract() — subtracts counts, can go negative
+ct.subtract('aab')
+ct['a']   # 6, ct['b']  # 1
+
+
+# arithmetic on Counters
+c1 = Counter(a=3, b=2)
+c2 = Counter(a=1, b=4, c=1)
+
+c1 + c2   # Counter({'b': 6, 'a': 4, 'c': 1}) — add counts
+c1 - c2   # Counter({'a': 2})                  — subtract, drop ≤ 0
+c1 & c2   # Counter({'a': 1, 'b': 2})          — min of each count
+c1 | c2   # Counter({'b': 4, 'a': 3, 'c': 1}) — max of each count
+
+
+# key traps
+# update() adds, not replaces — opposite of dict.update()
+ct = Counter(a=3)
+ct.update({'a': 2})
+print(ct['a'])   # 5, not 2
+
+# - operator drops zero and negative counts
+# subtract() keeps them; - does not
+c = Counter(a=2)
+c.subtract({'a': 5})
+print(c['a'])    # -3  ← subtract() keeps negatives
+c2 = Counter(a=2) - Counter(a=5)
+print(c2)        # Counter()  ← - drops non-positive results
+
+# Counter is a dict — all dict methods work
+dict(ct)         # convert back to plain dict
+list(ct.elements())  # expand back to list with repetitions: ['a','a','a',...]
+```
+
+
 
 ## Quick Mental Model
 
